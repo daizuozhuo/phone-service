@@ -1,4 +1,10 @@
 <div class="message" id="m{{ message["id"] }}">
-    <b>客户:</b>{% module linkify(message["body"]) %} <br/>
+    <b>
+        {% if message["from"]=="service" %}
+            {{ "客服: "}}
+        {% else %}
+            {{ "客户: "}}
+        {% end %}
+    </b>{% module linkify(message["body"]) %} <br/>
     <b>系统:</b>{{ response }}
 </div>

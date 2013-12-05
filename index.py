@@ -18,24 +18,40 @@ class MainHandler(tornado.web.RequestHandler):
        self.render("index.html", service=service_manager.services,
                    messages=[])
 
-class MessageNewHandler(tornado.web.RequestHandler):
+class CustomerMessageNewHandler(tornado.web.RequestHandler):
     def post(self):
         message = {
             "id": str(uuid.uuid4()),
             "body": self.get_argument("body"),
+            "from":"customer",
         }
         message["html"] = tornado.escape.to_basestring(
             self.render_string("message.html", message=message,
-                               response=service_manager.process(message["body"])))
+                               response=service_manager.process(message)))
 
         self.write(message)
+
+class ServiceMessageNewHandler(tornado.web.RequestHandler):
+    def post(self):
+        message = {
+            "id": str(uuid.uuid4()),
+            "body": self.get_argument("body"),
+            "from":"service",
+        }
+        message["html"] = tornado.escape.to_basestring(
+            self.render_string("message.html", message=message,
+                               response=service_manager.process(message)))
+
+        self.write(message)
+
 
 def main():
     parse_command_line()
     app = tornado.web.Application(
         [
             (r"/zhihu", MainHandler),
-            (r"/zhihu/a/message/new", MessageNewHandler),
+            (r"/zhihu/a/customer/new", CustomerMessageNewHandler),
+            (r"/zhihu/a/service/new", ServiceMessageNewHandler),
             ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
         template_path=os.path.join(os.path.dirname(__file__), "./templates"),

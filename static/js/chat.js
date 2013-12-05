@@ -19,7 +19,7 @@ function newMessage(form) {
     var message = form.formToDict();
     var disabled = form.find("input[type=submit]");
     disabled.disable();
-    $.postJSON("/zhihu/a/message/new", message, function(response) {
+    $.postJSON(form.attr('action'), message, function(response) {
         updater.showMessage(response);
         if (message.id) {
             form.parent().remove();
@@ -113,7 +113,11 @@ var updater = {
         if (existing.length > 0) return;
         var node = $(message.html);
         node.hide();
-        $("#inbox").append(node);
+        if (message.from == "customer") {
+            $("#customer-inbox").append(node);
+        } else {
+            $("#service-inbox").append(node);
+        }
         node.slideDown();
     }
 };

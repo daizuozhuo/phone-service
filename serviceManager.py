@@ -29,6 +29,7 @@ class CustomerService():
         self.status = CustomerService.OFFLINE
         return True
 
+UNSUPPORT = "unsupported request"
 #this class is singleton
 class ServiceManager():
     _instance = None
@@ -48,17 +49,23 @@ class ServiceManager():
         self.process(data)
         logging.info("%s wrote %s" % (self.client_address[0], data))
 
-    def process(self, data):
-        parts = data.split()
-        if len(parts) == 2:
-            return self.responseCustomerService(parts)
-        elif len(parts) == 3:
-            return  self.responseCustomer(parts[2])
+    def process(self, message):
+        if message["from"]=="service":
+            return self.responseCustomerService(message["body"])
+        elif message["from"] == "customer":
+            return  self.responseCustomer(message["body"])
         else:
-            return "unsupported command"
+            return UNSUPPORT
 
-    def responseCustomerService(self, parts):
-        number = int(parts[0].split(".")[1])
+    def responseCustomerService(self, data):
+        parts = data.split()
+        if len(parts)!=2:
+            return UNSUPPORT
+        try:
+            number = int(parts[0].split(".")[1])
+        except ValueError:
+            return UNSUPPORT
+
         if not self.isValidNumber(number):
             return "invalid phone number" 
             return
@@ -71,9 +78,18 @@ class ServiceManager():
             self.services[number].free()
             return "welcome back" 
         else:
-            return "unsupported command" 
+            return UNSUPPORT 
 
-    def responseCustomer(self, customer):
+    def responseCustomer(self, data):
+        parts = data.split()
+        if len(parts)!=1:
+            return UNSUPPORT
+
+        try:
+            customer = int(parts[0])
+        except ValueError:
+            return UNSUPPORT
+
         service_number = self.assignService()
         if service_number:
             return "Hello %s, no. %s is servering for you"\

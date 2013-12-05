@@ -149,7 +149,7 @@ a {
   line-height: 16pt;
 }
 
-#inbox {
+.inbox {
     min-height:400px;
 }
 
