@@ -137,8 +137,14 @@ var updater = {
         var node = $(message.html);
         node.hide();
         if (message.from == "customer") {
+            if($("#customer-inbox div").length > 9) {
+                $("#customer-inbox div:first"). remove();
+            }
             $("#customer-inbox").append(node);
         } else {
+            if($("#service-inbox div").length > 9) {
+                $("#service-inbox div:first"). remove();
+            }
             $("#service-inbox").append(node);
         }
         node.slideDown();
