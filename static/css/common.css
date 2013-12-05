@@ -1,0 +1,168 @@
+body {
+  display:block;
+  background: white;
+  color: black;
+  margin-top: 0;
+  margin:0;
+  padding:0;
+}
+
+table {
+  border-collapse: collapse;
+  border: 0;
+}
+
+td {
+  border: 0;
+  padding: 0;
+}
+
+code {
+  font-family: monospace;
+  color: #060;
+}
+
+pre {
+  margin-left: 1em;
+  padding-left: 1em;
+  border-left: 1px solid silver;
+  line-height: 14pt;
+}
+
+a {
+  color:#F6595C;
+}
+
+#header {
+  background:#f9f7f0;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 1em;
+}
+
+.hero-section {
+    padding: 120px 0;
+    background-color: #0077D9;
+    background-image: url(http://static.zhihu.com/static/img/jobs/light.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 140px;
+}
+
+.centered {
+    margin: -60px auto 0;
+}
+
+.jobs-section{
+    padding:60px;
+}
+
+.jobs-section .position-card{
+    width: 640px;
+    padding: 50px;
+    margin: -80px auto 0;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(19,74,119,.1);
+    border-radius: 4px;
+
+
+}
+
+.position-card {
+    width: 740px;
+    bottom: 10px;
+    padding: 0;
+}
+
+.aside {
+ max-width:250px;
+ float:right;
+ margin:auto;
+}
+
+#head-title {
+  font-size: 80px;
+  max-width:500px; 
+  color:white;
+}
+
+#footer,
+#content {
+  max-width: 950px;
+  margin:auto;
+}
+
+#footer {
+  margin-top: 3em;
+}
+
+.entry h1 a {
+  color: black;
+  text-decoration: none;
+}
+
+.entry {
+  margin-bottom: 2em;
+}
+
+.entry .date {
+  margin-top: 3px;
+}
+
+.entry p {
+  margin: 0;
+  margin-bottom: 1em;
+}
+
+.entry .body {
+  margin-top: 1em;
+  line-height: 16pt;
+}
+
+.compose td {
+  vertical-align: middle;
+  padding-bottom: 5px;
+}
+
+.compose td.field {
+  padding-right: 10px;
+}
+
+.compose .title,
+.compose .submit {
+  font-family: "Helvetica Nue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.compose .title {
+  font-size: 20pt;
+}
+
+.compose .title,
+.compose .markdown {
+  width: 100%;
+}
+
+.compose .markdown {
+  height: 500px;
+  line-height: 16pt;
+}
+
+#inbox {
+    min-height:400px;
+}
+
+#input {
+  bottom:-150px;
+  margin-top: 0.5em;
+}
+
+#inbox .message {
+  padding-top: 0.25em;
+}
+
+#nav {
+  float: right;
+  z-index: 99;
+}
