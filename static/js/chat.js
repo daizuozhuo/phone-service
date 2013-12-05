@@ -2,6 +2,20 @@ $(document).ready(function() {
     if (!window.console) window.console = {};
     if (!window.console.log) window.console.log = function() {};
 
+    $("#service-form").live("submit", function() {
+        newMessage($(this));
+        return false;
+    });
+
+    $("#online_btn").live("click", function() {
+        $("#service_info").val("online")
+    });
+
+    $("#offline_btn").live("click", function() {
+        $("#service_info").val("offline")
+    });
+
+
     $("#messageform").live("submit", function() {
         newMessage($(this));
         return false;
@@ -17,6 +31,11 @@ $(document).ready(function() {
 
 function newMessage(form) {
     var message = form.formToDict();
+    if(! isNumber(message["body"])) {
+        alert("please input number");
+        return;
+    }
+    console.log(message);
     var disabled = form.find("input[type=submit]");
     disabled.disable();
     $.postJSON(form.attr('action'), message, function(response) {
@@ -28,6 +47,10 @@ function newMessage(form) {
             disabled.enable();
         }
     });
+}
+
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 function getCookie(name) {

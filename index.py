@@ -33,9 +33,13 @@ class CustomerMessageNewHandler(tornado.web.RequestHandler):
 
 class ServiceMessageNewHandler(tornado.web.RequestHandler):
     def post(self):
+        if self.get_argument("online")=="online":
+            command = " online"
+        else:
+            command = " offline"
         message = {
             "id": str(uuid.uuid4()),
-            "body": self.get_argument("body"),
+            "body": self.get_argument("body") + command,
             "from":"service",
         }
         message["html"] = tornado.escape.to_basestring(
@@ -59,6 +63,7 @@ def main():
         xsrf_cookies=True,
         )
     app.listen(options.port)
+    print "visit host:%s/zhihu" % PORT
     tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":

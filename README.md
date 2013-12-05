@@ -2,7 +2,7 @@
 This is a simulated customer service phone system. At first I just write a
 naive socket server simulation, but then I realized this cannot demostrate
 my love for zhihu (^_^), therefore I implemented a web application based on
-Tornade.
+Tornade. 
 
 ##Solution 1: SocketSever
 You may modify configuration in `config.py`. The customer service phone

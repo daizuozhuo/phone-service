@@ -62,13 +62,13 @@ class ServiceManager():
         if len(parts)!=2:
             return UNSUPPORT
         try:
-            number = int(parts[0].split(".")[1])
+            number = int(parts[0])
         except ValueError:
             return UNSUPPORT
 
         if not self.isValidNumber(number):
-            return "invalid phone number" 
-            return
+            return "our phone number is %s - %s" %\
+        (CUSTOMER_SERVICE_STARTNUMBER, CUSTOMER_SERVICE_ENDNUMBER) 
         if parts[1] == "offline" and number in self.services:
             if not self.services[number].offline():
                 return "sorry, you can't leave when calling" 

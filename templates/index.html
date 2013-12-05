@@ -23,17 +23,21 @@
     <div id="my-tab-content" class="tab-content">
     <div class="position-card tab-pane" id="customer-service">
       <div id="service-inbox" class="inbox">
-        {% for message in messages[-18:] %}
+        {% for message in messages %}
           {% module Template("message.html", message=message) %}
         {% end %}
       </div>
       <div id="input">
-        <form action="/zhihu/a/service/new" method="post" id="messageform">
+        <form action="/zhihu/a/service/new" method="post" id="service-form">
           <table> <tr>
-              <td><input name="body" id="message" style="width:500px"/></td>
+              <td><input name="body" id="message" style="width:450px"/></td>
+              <td><input type="hidden" name="online" id="service_info"/></td>
               <td style="padding-left:5px">
-                <input type="submit" value="{{ _("Post") }}"/>
-                <input type="hidden" name="next" value="{{ request.path }}"/>
+                <input type="submit" id="online_btn" value="{{ _("Online") }}"/>
+                {% module xsrf_form_html() %}
+              </td>
+              <td style="padding-left:5px">
+                <input type="submit" id="offline_btn" value="{{_("Offline") }}"/>
                 {% module xsrf_form_html() %}
               </td>
           </tr> </table>
